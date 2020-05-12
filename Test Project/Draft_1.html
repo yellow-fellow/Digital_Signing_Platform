@@ -6,11 +6,11 @@
 </head>
 
 <body>
-    
 
-    <div class='container-fluid' align='center' style='background-color:peachpuff'>
-        <div class='jumbotron' align='center' style='background-color:peachpuff'>
-            <img src='./govtech-logo-nbg.gif' width='400px' height='250px' >
+
+    <div class='container-fluid' align='center' style='background-color:rgb(249, 230, 212)'>
+        <div class='jumbotron' align='center' style='background-color:rgb(249, 230, 212)'>
+            <img src='./govtech-logo-nbg.gif' width='400px' height='250px'>
             <!-- <img src='./NDI.png' width='450px' height='300px' > -->
         </div>
     </div>
@@ -23,10 +23,12 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <div class='container offset-lg-2'align='centre'>
-            <strong>Please fill in the PDF and drag the placeholder (at the bottom of the page) onto the area you would want your signature to be at.</strong>
+        <div class='container offset-lg-2' align='centre'>
+            <strong>Please fill in the PDF and drag the placeholder (at the bottom of the page) onto the area you would
+                want your signature to be at.</strong>
         </div>
     </div>
+
 
     <!-- Form-Fillable-PDF -->
     <div class='container'>
@@ -36,20 +38,55 @@
     <div class='container-fluid' align='center' style='background-color:white'>
         <div class='jumbotron' align='center' style='background-color:white'>
             <div class='col-xs-12'>
-                <img src='https://i0.wp.com/www.impact-media.be/wp-content/uploads/2019/09/placeholder-1-e1533569576673-960x960.png?ssl=1' title='Please drag and drop this placeholder at the place you would want your signature to be.' width='250px' height='250px'>
+                <img src='https://i0.wp.com/www.impact-media.be/wp-content/uploads/2019/09/placeholder-1-e1533569576673-960x960.png?ssl=1'
+                    title='Please drag and drop this placeholder at the place you would want your signature to be.'
+                    width='250px' height='250px'>
             </div>
             <br>
             <div class='col-xs-12'>
-                <a name="" id="" class="btn btn-primary" href="#" role="button"align='center'>Confirm</a>
+                <!-- <a name="" id="" class="btn btn-primary" href="#" role="button"align='center'>Confirm</a> -->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+                    Proceed
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">SIGNING REQUEST</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <strong>Challenge Code:</strong> 123456
+                                <br>
+                                <strong>Document Name:</strong> form_fillable.pdf
+                                <hr>
+                                <img src='./qrcode.png' width='200px' height='250px'>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <!-- <button type="button" class="btn btn-primary">Submit</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
+
         </div>
     </div>
-    
-    
+
+    <script>
+        var alert_box= 'Please review the document and fill up all the fields accordingly.';
+        alert(alert_box);
+    </script>
 
 
-   
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
