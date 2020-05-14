@@ -23,11 +23,20 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <div class='container offset-lg-2' align='centre'>
-            <strong>Please fill in the PDF and drag the placeholder (at the bottom of the page) onto the area you would
-                want your signature to be at.</strong>
+        <div class='container offset-lg-2' align='centre' style='font-family: Arial;'>
+            <h5>Please fill in the PDF and drag the placeholder (at the bottom of the page) onto the area you would
+                want your signature to be at.</h5>
+        </div>
+        <div class='container offset-lg-3' align='centre' style='font-family: Arial;'>
+            <h5>
+                Date/Time now is <span id='dateTime'></span>
+            </h5>
         </div>
     </div>
+    <script>
+        var dateTimeField = document.getElementById('dateTime');
+        dateTimeField.innerHTML = new Date();
+    </script>
 
 
     <!-- Form-Fillable-PDF -->
@@ -84,8 +93,6 @@
         var alert_box= 'Please review the document and fill up all the fields accordingly.';
         alert(alert_box);
     </script>
-
-
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
