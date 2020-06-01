@@ -64,10 +64,50 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.3.200/build/pdf.min.js"></script>
-
+    <style>
+    .sidenav {
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        /* background-color: #111; */
+        overflow-x: visible;
+        padding-top: 20px;
+      }
+      
+      .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+      }
+      
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+      
+      .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+      }
+      
+      @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+      }
+    </style>
+    <style>
+        #draggable {
+            padding-top: 30%;
+        }
+    </style>
 </head>
 
-<body>
+<body style='background-color:rgb(232, 254, 254)'>
 
 
     <div class='container-fluid' align='center' style='background-color:rgb(249, 230, 212)'>
@@ -107,19 +147,26 @@
         <embed src='./formfillablepdf.pdf' type='application/pdf' width='100%' height='600px'>
     </div> -->
 
-     <!-- New PDF reader -->
+    <!-- New PDF reader -->
 
-     <div class='container-fluid' id="myImgId" style='background-color: lightcyan;'align='center'>
-        <canvas id='my_canvas' style='border:solid;border-width:2px;width: 800px;'></canvas>
+    <div class='container-fluid' id="myImgId" style='background-color: lightcyan;' align='center'>
+        <div id="draggable" class="ui-widget-content col-xs-4" style='float: left;vertical-align: middle;'>
+            <img src='https://i0.wp.com/www.impact-media.be/wp-content/uploads/2019/09/placeholder-1-e1533569576673-960x960.png?ssl=1'
+                title='Please drag and drop this placeholder at the place you would want your signature to be.'
+                width='200px' height='200px'>
+        </div>
+        <div class='container col-xs-8'>
+            <canvas id='my_canvas' style='border:solid;border-width:2px;width: 800px;'></canvas>
 
-        <hr>
+            <hr>
 
-        <center>
-            <p>X:<span id="x"></span></p>
-            <p>Y:<span id="y"></span></p>
-        </center>
+            <center>
+                <p>X:<span id="x"></span></p>
+                <p>Y:<span id="y"></span></p>
+            </center>
 
-        <hr>
+            <hr>
+        </div>
     </div>
 
     <div class='container-fluid' align='center' style='background-color:rgb(232, 254, 254)'>
@@ -152,20 +199,14 @@
                                         <img src='./qrcode.png' width='200px' height='250px'>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
                                         <!-- <button type="button" class="btn btn-primary">Submit</button> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class='col-xs-12'>
-                <div id="draggable" class="ui-widget-content">
-                    <img src='https://i0.wp.com/www.impact-media.be/wp-content/uploads/2019/09/placeholder-1-e1533569576673-960x960.png?ssl=1'
-                        title='Please drag and drop this placeholder at the place you would want your signature to be.'
-                        width='200px' height='200px'>
                 </div>
             </div>
         </div>
@@ -176,7 +217,7 @@
         alert(alert_box);
     </script>
 
-   
+
 
 
     <script>
@@ -199,7 +240,7 @@
         });
     </script>
 
-    
+
 
 
     <!-- Find coordinates of the image -->
