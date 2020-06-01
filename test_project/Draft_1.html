@@ -16,9 +16,55 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function () {
-            $("#draggable").draggable();
+            $("#draggable").draggable({
+                cursor: 'grabbing',
+                opacity: '0.5',
+                containment: 'document'
+            });
         });
     </script>
+
+    <script type="text/javascript">
+
+        function FindPosition(oElement) {
+            if (typeof (oElement.offsetParent) != "undefined") {
+                for (var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent) {
+                    posX += oElement.offsetLeft;
+                    posY += oElement.offsetTop;
+                }
+                return [posX, posY];
+            }
+            else {
+                return [oElement.x, oElement.y];
+            }
+        }
+
+        function GetCoordinates(e) {
+            var PosX = 0;
+            var PosY = 0;
+            var ImgPos;
+            ImgPos = FindPosition(myImg);
+            if (!e) var e = window.event;
+            if (e.pageX || e.pageY) {
+                PosX = e.pageX;
+                PosY = e.pageY;
+            }
+            else if (e.clientX || e.clientY) {
+                PosX = e.clientX + document.body.scrollLeft
+                    + document.documentElement.scrollLeft;
+                PosY = e.clientY + document.body.scrollTop
+                    + document.documentElement.scrollTop;
+            }
+            PosX = PosX - ImgPos[0];
+            PosY = PosY - ImgPos[1];
+            document.getElementById("x").innerHTML = PosX;
+            document.getElementById("y").innerHTML = PosY;
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.3.200/build/pdf.min.js"></script>
+
 </head>
 
 <body>
@@ -54,63 +100,114 @@
         dateTimeField.innerHTML = new Date();
     </script>
 
-    
+
 
     <!-- Form-Fillable-PDF -->
-    <div class='container-fluid'>
+    <!-- <div class='container-fluid'>
         <embed src='./formfillablepdf.pdf' type='application/pdf' width='100%' height='600px'>
+    </div> -->
+
+     <!-- New PDF reader -->
+
+     <div class='container-fluid' id="myImgId" style='background-color: lightcyan;'align='center'>
+        <canvas id='my_canvas' style='border:solid;border-width:2px;width: 800px;'></canvas>
+
+        <hr>
+
+        <center>
+            <p>X:<span id="x"></span></p>
+            <p>Y:<span id="y"></span></p>
+        </center>
+
+        <hr>
     </div>
 
-    <div class='container-fluid' align='center' style='background-color:white'>
-        <div class='jumbotron' align='center' style='background-color:white'>
-            <div class='col-xs-12'>
-                <div id="draggable" class="ui-widget-content">
-                    <img src='https://i0.wp.com/www.impact-media.be/wp-content/uploads/2019/09/placeholder-1-e1533569576673-960x960.png?ssl=1'
-                    title='Please drag and drop this placeholder at the place you would want your signature to be.'
-                    width='200px' height='200px'>
-                </div>
-            </div>
-            <br>
-            <div class='col-xs-12'>
-                <!-- <a name="" id="" class="btn btn-primary" href="#" role="button"align='center'>Confirm</a> -->
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
-                    Proceed
-                </button>
+    <div class='container-fluid' align='center' style='background-color:rgb(232, 254, 254)'>
+        <div class='jumbotron' align='center' style='background-color:rgb(232, 254, 254)'>
+            <div class='container-fluid' align='center' style='background-color:rgb(232, 254, 254)'>
+                <div class='jumbotron' align='center' style='background-color:rgb(232, 254, 254)'>
+                    <div class='col-xs-12'>
+                        <!-- <a name="" id="" class="btn btn-primary" href="#" role="button"align='center'>Confirm</a> -->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+                            Proceed
+                        </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="modal-title">SIGNING REQUEST</h3>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <strong>Challenge Code:</strong> 123456
-                                <br>
-                                <strong>Document Name:</strong> form_fillable.pdf
-                                <hr>
-                                <img src='./qrcode.png' width='200px' height='250px'>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <!-- <button type="button" class="btn btn-primary">Submit</button> -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">SIGNING REQUEST</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <strong>Challenge Code:</strong> 123456
+                                        <br>
+                                        <strong>Document Name:</strong> form_fillable.pdf
+                                        <hr>
+                                        <img src='./qrcode.png' width='200px' height='250px'>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <!-- <button type="button" class="btn btn-primary">Submit</button> -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class='col-xs-12'>
+                <div id="draggable" class="ui-widget-content">
+                    <img src='https://i0.wp.com/www.impact-media.be/wp-content/uploads/2019/09/placeholder-1-e1533569576673-960x960.png?ssl=1'
+                        title='Please drag and drop this placeholder at the place you would want your signature to be.'
+                        width='200px' height='200px'>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        var alert_box= 'Please review the document and fill up all the fields accordingly.';
+        var alert_box = 'Please review the document and fill up all the fields accordingly.';
         alert(alert_box);
+    </script>
+
+   
+
+
+    <script>
+        pdfjsLib.getDocument('./formfillablepdf.pdf').then(doc => {
+            console.log("This file has " + doc._pdfInfo.numPages + " pages.");
+
+            doc.getPage(1).then(page => {
+                var myCanvas = document.getElementById('my_canvas');
+                var context = myCanvas.getContext('2d');
+
+                var viewport = page.getViewport(2);
+                myCanvas.width = viewport.width;
+                myCanvas.height = viewport.height;
+
+                page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                });
+            });
+        });
+    </script>
+
+    
+
+
+    <!-- Find coordinates of the image -->
+
+    <script type="text/javascript">
+        var myImg = document.getElementById("my_canvas");
+        var myPlaceholder = document.getElementById("draggable");
+        myPlaceholder.onmouseup = GetCoordinates;
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
