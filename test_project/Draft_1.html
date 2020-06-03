@@ -105,19 +105,28 @@
             padding-top: 30%;
         }
     </style>
+    <style>
+        div.sticky {
+          position: -webkit-sticky;
+          position: sticky;
+          z-index: 200;
+          top: 0;
+          background-color:rgb(232, 254, 254);
+          /* padding: 50px; */
+          font-size: 20px;
+        }
+    </style>
 </head>
 
 <body style='background-color:rgb(232, 254, 254)'>
 
 
-    <div class='container-fluid' align='center' style='background-color:rgb(249, 230, 212)'>
+    <div class='container-fluid' align='center' style='background-color:rgb(249, 230, 212);'>
         <div class='jumbotron' align='center' style='background-color:rgb(249, 230, 212)'>
             <img src='./govtech-logo-nbg.gif' width='400px' height='250px'>
             <!-- <img src='./NDI.png' width='450px' height='300px' > -->
         </div>
     </div>
-
-    <hr>
 
 
     <!-- Alert Bar -->
@@ -131,9 +140,18 @@
         </div>
         <div class='container offset-lg-3' align='centre' style='font-family: Arial;'>
             <h5>
-                Date/Time now is <span id='dateTime'></span>
+                Please click on the <b>PROCEED</b> button once you have confirmed the location of your signature.
             </h5>
         </div>
+    </div>
+    <div class="sticky" >
+        <hr>
+        <span style='padding-left: 85%;padding-top: 1%;padding-bottom: 1%;'>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+            Proceed
+        </button>
+        </span>
+        <hr>
     </div>
     <script>
         var dateTimeField = document.getElementById('dateTime');
@@ -153,7 +171,7 @@
         <div id="draggable" class="ui-widget-content col-xs-4" style='float: left;vertical-align: middle;'>
             <img src='https://i0.wp.com/www.impact-media.be/wp-content/uploads/2019/09/placeholder-1-e1533569576673-960x960.png?ssl=1'
                 title='Please drag and drop this placeholder at the place you would want your signature to be.'
-                width='200px' height='200px'>
+                width='200px' height='100px'>
         </div>
         <div class='container col-xs-8'>
             <canvas id='my_canvas' style='border:solid;border-width:2px;width: 800px;'></canvas>
