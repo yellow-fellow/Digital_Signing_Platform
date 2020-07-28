@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <link rel='stylesheet' href='./css/bootstrap.min.css' />
+    <title>Testing Platform</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <script>
+        document.querySelector("#pdf-upload").addEventListener("change", function (e) {
+            var file = e.target.files[0]
+            if (file.type != "application/pdf") {
+                console.error(file.name, "is not a pdf file.")
+                return
+            }
+
+            var fileReader = new FileReader();
+
+            fileReader.onload = function () {
+                var typedarray = new Uint8Array(this.result);
+
+                pdfjsLib.getDocument(typedarray).then(function (pdf) {
+                    // you can now use *pdf* here
+                    console.log("the pdf has ", pdf.numPages, "page(s).")
+                    pdf.getPage(1).then(function (page) {
+                        // you can now use *page* here
+                        var viewport = page.getViewport(1);
+                        var canvas = document.createElement("canvas")
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+
+                        page.render({
+                            canvasContext: canvas.getContext('2d'),
+                            viewport: viewport
+                        });
+
+                        var div = document.createElement('div');
+                        div.innerHTML = canvas.toDataURL('image/jpeg', .8);
+                        document.body.appendChild(div);
+
+                    });
+
+                });
+            };
+
+            fileReader.readAsArrayBuffer(file);
+        })
+    </script>
+
+
+    <input type="file" id="pdf-upload">
+    <canvas id="canvas" width="300" height="200"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

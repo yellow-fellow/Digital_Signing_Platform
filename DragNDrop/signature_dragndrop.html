@@ -65,40 +65,47 @@
 
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.3.200/build/pdf.min.js"></script>
     <style>
-    .sidenav {
-        height: 100%;
-        width: 160px;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        /* background-color: #111; */
-        overflow-x: visible;
-        padding-top: 20px;
-      }
-      
-      .sidenav a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-      }
-      
-      .sidenav a:hover {
-        color: #f1f1f1;
-      }
-      
-      .main {
-        margin-left: 160px; /* Same as the width of the sidenav */
-        font-size: 28px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
-      }
-      
-      @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
-      }
+        .sidenav {
+            height: 100%;
+            width: 160px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            /* background-color: #111; */
+            overflow-x: visible;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .main {
+            margin-left: 160px;
+            /* Same as the width of the sidenav */
+            font-size: 28px;
+            /* Increased text to enable scrolling */
+            padding: 0px 10px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
     </style>
     <style>
         #draggable {
@@ -107,13 +114,13 @@
     </style>
     <style>
         div.sticky {
-          position: -webkit-sticky;
-          position: sticky;
-          z-index: 200;
-          top: 0;
-          background-color:rgb(232, 254, 254);
-          /* padding: 50px; */
-          font-size: 20px;
+            position: -webkit-sticky;
+            position: sticky;
+            z-index: 200;
+            top: 0;
+            background-color: rgb(232, 254, 254);
+            /* padding: 50px; */
+            font-size: 20px;
         }
     </style>
 </head>
@@ -123,11 +130,11 @@
 
     <div class='container-fluid' align='center' style='background-color:rgb(249, 230, 212);'>
         <!-- <div class='jumbotron' align='center' style='background-color:rgb(249, 230, 212)'> -->
-            
-            <img src='./govtech-logo-nbg.gif' width='400px' height='250px'>
-            <br>
-            <br>
-            <!-- <img src='./NDI.png' width='450px' height='300px' > -->
+
+        <img src='./govtech-logo-nbg.gif' width='400px' height='250px'>
+        <br>
+        <br>
+        <!-- <img src='./NDI.png' width='450px' height='300px' > -->
         <!-- </div> -->
     </div>
 
@@ -137,8 +144,8 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <div class='container offset-lg-2' align='centre' style='font-family: Arial;'>
-            <h5>Please fill in the PDF and drag the placeholder (at the bottom of the page) onto the area you would
+        <div class='container offset-lg-1' align='centre' style='font-family: Arial;padding-left: 80px;'>
+            <h5>Please fill in the PDF and drag the placeholder (at the left hand side of the page) onto the area you would
                 want your signature to be at.</h5>
         </div>
         <div class='container offset-lg-3' align='centre' style='font-family: Arial;'>
@@ -147,12 +154,12 @@
             </h5>
         </div>
     </div>
-    <div class="sticky" >
+    <div class="sticky">
         <hr>
         <span style='padding-left: 85%;padding-top: 1%;padding-bottom: 1%;'>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
-            Proceed
-        </button>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+                Proceed
+            </button>
         </span>
         <hr>
     </div>
@@ -229,6 +236,10 @@
         </div>
     </div>
 
+    <div>
+        <object archive="../"></object>
+    </div>
+
     <script>
         var alert_box = 'Please review the document and fill up all the fields accordingly.';
         alert(alert_box);
@@ -236,9 +247,10 @@
 
 
 
-
     <script>
-        pdfjsLib.getDocument('./formfillablepdf.pdf').then(doc => {
+        var dotSlash = "./";
+        var fileLocation = (localStorage.getItem("PDF").substring(12));
+        pdfjsLib.getDocument(dotSlash.concat(fileLocation)).then(doc => {
             console.log("This file has " + doc._pdfInfo.numPages + " pages.");
 
             doc.getPage(1).then(page => {
@@ -256,9 +268,6 @@
             });
         });
     </script>
-
-
-
 
     <!-- Find coordinates of the image -->
 

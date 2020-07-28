@@ -20,6 +20,13 @@
             font-size: 20px;
         }
     </style>
+    <script>
+        function passValues(){
+            var file = document.getElementById("myFile").value;
+            localStorage.setItem("PDF",file);
+            return false;
+        }
+    </script>
     
 </head>
 
@@ -106,7 +113,14 @@
             </div>
         </div>
     </div>
-    
+
+    <!--Testing upload button-->
+    <form action="./signature_dragndrop.html">
+        <input type="file" id="myFile" name="filename">
+        <input type="submit" value="Submit" onclick="passValues()">
+    </form>
+
+
     <!-- button -->
     <div class='container-fluid' align='center' style='background-color:rgb(232, 254, 254)'>
         <div class='jumbotron' align='center' style='background-color:rgb(232, 254, 254)'>
