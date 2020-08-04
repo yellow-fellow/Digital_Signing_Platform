@@ -34,7 +34,7 @@
         <hr>
     </div>
     <div class='container-fluid' id="myImgId" style='background-color: lightcyan;' align='center'>
-        <a>*BLACKBOX -> a PDF with signature on it will be generated and displayed for review*</a>
+        <!-- <a>*BLACKBOX -> a PDF with signature on it will be generated and displayed for review*</a> -->
         <canvas id='my_canvas' style='border:solid;border-width:2px;width: 800px;'></canvas>
         <div class='jumbotron' style='background-color:rgb(232, 254, 254);' align='center'>
             <br>
@@ -45,7 +45,7 @@
     </div>
 
     <script>
-        pdfjsLib.getDocument('./formfillablepdf.pdf').then(doc => {
+        pdfjsLib.getDocument('./signed_document.pdf').then(doc => {
             console.log("This file has " + doc._pdfInfo.numPages + " pages.");
 
             doc.getPage(1).then(page => {
