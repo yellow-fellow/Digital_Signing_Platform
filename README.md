@@ -1,6 +1,5 @@
 # Digital Signing Platform
 ## *Bootstrap 4 - HTML,CSS,JavaScript*
-### *Backend
 
 ### * Features *
 
